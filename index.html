@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For You Lovelove ❤️</title>
+<style>
+body{
+  background:black;
+  color:white;
+  font-family:Arial;
+  text-align:center;
+  padding:40px;
+}
+button{
+  padding:15px 30px;
+  font-size:20px;
+  border:none;
+  border-radius:20px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+}
+.hidden{display:none;}
+img{
+  width:250px;
+  border-radius:20px;
+  margin:15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Wait...</h1>
+<p>Someone prepared this for you</p>
+
+<button onclick="start()">Enter</button>
+
+<div id="main" class="hidden">
+  <h1>Happy Birthday ❤️</h1>
+  <p>I know we're far, but today I wanted to be closer than distance.</p>
+
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
+
+  <p id="msg"></p>
+  <button onclick="next()">Next</button>
+</div>
+
+<script>
+let messages = [
+"You are my favorite notification",
+"Thank you for staying",
+"I am lucky you were born",
+"Distance is temporary. You are permanent.",
+"I love you. Happy Birthday ❤️"
+];
+let i=0;
+
+function start(){
+ document.querySelector("h1").style.display="none";
+ document.querySelector("p").style.display="none";
+ document.querySelector("button").style.display="none";
+ document.getElementById("main").classList.remove("hidden");
+}
+
+function next(){
+ document.getElementById("msg").innerHTML=messages[i];
+ i++;
+ if(i>=messages.length){i=messages.length-1;}
+}
+</script>
+
+</body>
+</html>
