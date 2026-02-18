@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>For You Lovelove ❤️</title>
+
 <style>
 body{
   background:black;
@@ -10,6 +11,7 @@ body{
   text-align:center;
   padding:40px;
 }
+
 button{
   padding:15px 30px;
   font-size:20px;
@@ -19,55 +21,131 @@ button{
   color:white;
   cursor:pointer;
 }
+
 .hidden{display:none;}
+
 img{
-  width:250px;
-  border-radius:20px;
-  margin:15px;
+  width:260px;
+  border-radius:18px;
+  margin:20px;
+  box-shadow:0 0 25px rgba(255,77,109,.6);
+}
+
+#letter{
+  max-width:600px;
+  margin:auto;
+  font-size:20px;
+  line-height:1.6;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Wait...</h1>
-<p>Someone prepared this for you</p>
-
-<button onclick="start()">Enter</button>
+<h1 id="startTitle">Hey...</h1>
+<p id="startText">Before your birthday ends, open this.</p>
+<button onclick="start()">Open</button>
 
 <div id="main" class="hidden">
-  <h1>Happy Birthday ❤️</h1>
-  <p>I know we're far, but today I wanted to be closer than distance.</p>
 
-  <img src="photo1.jpg">
-  <img src="photo2.jpg">
+<h1>Happy Birthday Lovelove ❤️</h1>
 
-  <p id="msg"></p>
-  <button onclick="next()">Next</button>
+<img id="photo" src="photo1.jpg">
+
+<p id="msg"></p>
+
+<button onclick="next()">Next</button>
+
+<div id="letter" class="hidden"></div>
+
 </div>
 
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-let messages = [
-"You are my favorite notification",
-"Thank you for staying",
-"I am lucky you were born",
-"Distance is temporary. You are permanent.",
-"I love you. Happy Birthday ❤️"
+
+let photos = [
+"photo1.jpg",
+"photo2.jpg",
+"photo3.jpg",
+"photo4.jpg",
+"photo5.jpg"
 ];
+
+let messages = [
+"Every memory here is one of my favorites",
+"I kept these because they matter to me",
+"You matter to me",
+"Even from far away, you became part of my everyday life",
+"And today, I celebrate you"
+];
+
 let i=0;
 
 function start(){
- document.querySelector("h1").style.display="none";
- document.querySelector("p").style.display="none";
+ document.getElementById("startTitle").style.display="none";
+ document.getElementById("startText").style.display="none";
  document.querySelector("button").style.display="none";
  document.getElementById("main").classList.remove("hidden");
+ document.getElementById("music").play();
+ showMessage(messages[i]);
 }
 
 function next(){
- document.getElementById("msg").innerHTML=messages[i];
  i++;
- if(i>=messages.length){i=messages.length-1;}
+
+ if(i < photos.length){
+   document.getElementById("photo").src = photos[i];
+   showMessage(messages[i]);
+ }
+ else{
+   showLetter();
+ }
 }
+
+function showMessage(text){
+ let msg = document.getElementById("msg");
+ msg.innerHTML="";
+ let index=0;
+
+ let typing = setInterval(()=>{
+   msg.innerHTML += text.charAt(index);
+   index++;
+   if(index>=text.length) clearInterval(typing);
+ },35);
+}
+
+function showLetter(){
+ document.getElementById("photo").style.display="none";
+ document.getElementById("msg").style.display="none";
+ document.querySelector("#main button").style.display="none";
+
+ let letter = document.getElementById("letter");
+ letter.classList.remove("hidden");
+
+ let text = `I know distance makes things hard sometimes.
+
+But if there's one thing I want you to remember today...
+
+It's that someone out there is grateful you exist.
+
+Thank you for loving me even from afar.
+Thank you for staying.
+Thank you for being you.
+
+Happy Birthday.
+I love you always. ❤️`;
+
+ let i=0;
+ let typing = setInterval(()=>{
+   letter.innerHTML += text.charAt(i);
+   i++;
+   if(i>=text.length) clearInterval(typing);
+ },30);
+}
+
 </script>
 
 </body>
